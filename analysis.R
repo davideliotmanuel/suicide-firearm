@@ -17,6 +17,10 @@ data <- data %>%
 with_gun_control <- filter(data, GunControlLaw == 1)$CrudeRate
 without_gun_control <- filter(data, GunControlLaw == 0)$CrudeRate
 
+# Calculate means
+mean_with_gun_control <- mean(with_gun_control, na.rm = TRUE)
+mean_without_gun_control <- mean(without_gun_control, na.rm = TRUE)
+
 # Perform t-test
 t_test_result <- t.test(with_gun_control, without_gun_control)
 
@@ -24,6 +28,10 @@ t_test_result <- t.test(with_gun_control, without_gun_control)
 cohen_d_result <- cohens_d(with_gun_control, without_gun_control)
 
 # Print the results
+cat("Mean Suicide Rate (per 100,000) for States with Gun Control Laws:\n")
+print(mean_with_gun_control)
+cat("\nMean Suicide Rate (per 100,000) for States without Gun Control Laws:\n")
+print(mean_without_gun_control)
 cat("T-test Results:\n")
 print(t_test_result)
 cat("\nEffect Size (Cohen's d):\n")
